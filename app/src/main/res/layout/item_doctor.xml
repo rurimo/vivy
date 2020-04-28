@@ -29,19 +29,18 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
             android:max="5"
             android:rating="5"
-            android:scaleX=".95"
-            android:scaleY=".95"
+            android:scaleX=".85"
+            android:scaleY=".85"
             android:transformPivotX="0dp"
             android:transformPivotY="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/doctor_iv_photo" />
+            app:layout_constraintStart_toStartOf="@+id/doctor_iv_photo" />
 
         <TextView
             android:id="@+id/doctor_tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="6dp"
@@ -61,6 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_margin="12dp"
+            android:autoLink="web"
+            android:linksClickable="true"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             android:visibility="gone"
@@ -68,18 +69,6 @@
             app:layout_constraintStart_toEndOf="@+id/doctor_rating_iv"
             tools:text="Website" />
 
-        <TextView
-            android:id="@+id/doctor_phone_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="12dp"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/doctor_address_tv"
-            app:layout_constraintStart_toEndOf="@+id/doctor_website_tv"
-            tools:text="Call" />
 
         <TextView
             android:id="@+id/doctor_rating_count_tv"
@@ -95,19 +84,33 @@
             app:layout_constraintTop_toBottomOf="@+id/doctor_tv_name"
             tools:text="Reviews: 5" />
 
-        <TextView
-            android:id="@+id/doctor_address_tv"
+        <Button
+            android:id="@+id/doctor_phone_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_margin="12dp"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:layout_marginEnd="12dp"
+            android:text="@string/call"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Address" />
+            app:layout_constraintEnd_toStartOf="@+id/doctor_address_btn" />
+
+        <Button
+            android:id="@+id/doctor_address_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:autoLink="web"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/address"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
