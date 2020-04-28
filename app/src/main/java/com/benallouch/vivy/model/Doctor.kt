@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class Doctor(
     val id: String,
     val name: String,
-    val photoId: String,
+    val photoId: String?,
     val rating: Double,
     val address: String,
     val lat: Double,
@@ -17,10 +17,10 @@ data class Doctor(
     val reviewCount: Int,
     val specialityIds: List<Int>,
     val source: String,
-    val phoneNumber: String,
-    val email: String,
+    val phoneNumber: String?,
+    val email: String?,
     val website: String,
     val openingHours: List<String>,
-    val integration: String,
-    val translation: String
+    val integration: String?,
+    val translation: String?
 ) : Parcelable
