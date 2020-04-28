@@ -3,10 +3,10 @@ package com.benallouch.vivy.api.doctors
 import com.benallouch.vivy.model.DoctorsResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Url
+
 
 interface DoctorsService {
-    //https://vivy.com/interviews/challenges/android/doctors-lastkey.json
-    @GET("interviews/challenges/android/doctors.json")
-    fun fetchDoctors(@Query("lastKey") lastKey: String?): Call<DoctorsResponse>
+    @GET
+    fun fetchDoctors(@Url url: String): Call<DoctorsResponse>
 }

@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.android.gygreviews.extension.notifyNewData
 import com.benallouch.vivy.R
+import com.benallouch.vivy.extensions.notifyNewData
 import com.benallouch.vivy.extensions.toTextDrawable
 import com.benallouch.vivy.model.Doctor
 import com.bumptech.glide.Glide
@@ -26,9 +26,11 @@ class DoctorsHolder(val callbacks: Callbacks) : RecyclerView.Adapter<DoctorsHold
         notifyNewData(old, new) { o, n -> o.id == n.id }
     }
 
+    private var fetchedItems = arrayListOf<Doctor>()
+
     interface Callbacks {
         fun onDoctorItemSelected(doctor: Doctor)
-        fun onDataAvailable()
+        fun onDataAvailable(lastKey: String?)
 
     }
 
@@ -43,9 +45,10 @@ class DoctorsHolder(val callbacks: Callbacks) : RecyclerView.Adapter<DoctorsHold
         holder.bindView(items[position])
     }
 
-    fun updateData(newData: List<Doctor>) {
-        items = newData
-        callbacks.onDataAvailable()
+    fun updateData(newData: Pair<String, List<Doctor>>) {
+        fetchedItems.addAll(newData.second as ArrayList<Doctor>)
+        items = fetchedItems
+        callbacks.onDataAvailable(newData.first)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

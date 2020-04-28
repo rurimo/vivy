@@ -6,9 +6,9 @@ import com.benallouch.vivy.model.Doctor
 import com.benallouch.vivy.view.adapter.DoctorsHolder
 
 @BindingAdapter("adapterDoctors")
-fun bindAdapterDoctorsList(view: RecyclerView, reviews: List<Doctor>?) {
-    if (!reviews.isNullOrEmpty()) {
-        (view.adapter as DoctorsHolder).updateData(reviews)
+fun bindAdapterDoctorsList(view: RecyclerView, reviews: Pair<String, List<Doctor>>?) {
+    if (!reviews?.second.isNullOrEmpty()) {
+        (view.adapter as DoctorsHolder).updateData(reviews!!)
     }
 }
 
