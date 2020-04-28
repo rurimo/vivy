@@ -6,7 +6,7 @@ import com.benallouch.vivy.model.DoctorsResponse
 
 class DoctorsClient(private val doctorsService: DoctorsService) {
     fun getDoctors(
-        laskey: String,
+        laskey: String?,
         onResult: (response: ApiResponse<DoctorsResponse>) -> Unit
     ) {
         this.doctorsService.fetchDoctors(laskey).async(onResult)

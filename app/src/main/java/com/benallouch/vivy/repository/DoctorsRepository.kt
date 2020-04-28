@@ -15,24 +15,24 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
         Timber.d("Injection ReviewsRepository")
     }
 
-    suspend fun getDoctors(lastKey:String, error: (String) -> Unit) =
+    suspend fun getDoctors(lastKey:String?, error: (String) -> Unit) =
         withContext(Dispatchers.IO) {
             val liveData = MutableLiveData<List<Doctor>>()
-            var reviews = arrayListOf<Doctor>()
+            var doctors = arrayListOf<Doctor>()
 
             doctorsClient.getDoctors(lastKey) { response ->
                 when (response) {
                     is ApiResponse.Success -> {
                         response.data?.let {
-                            reviews.addAll(it.doctors)
-                            liveData.postValue(reviews)
+                            doctors.addAll(it.doctors)
+                            liveData.postValue(doctors)
                         }
                     }
                     is ApiResponse.Failure.Error -> error(response.message())
                     is ApiResponse.Failure.Exception -> error(response.message())
                 }
             }
-            liveData.apply { postValue(reviews) }
+            liveData.apply { postValue(doctors) }
 
         }
 }

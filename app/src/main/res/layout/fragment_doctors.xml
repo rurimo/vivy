@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.benallouch.vivy.view.doctors.DoctorsFragmentViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.benallouch.vivy.view.adapter.DoctorsHolder" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_doctors"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:adapter="@{adapter}"
+            app:adapterDoctors="@{viewModel.doctorsListLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:toast="@{viewModel.toastLiveData}"
+            tools:listitem="@layout/item_doctor" />
+
+        <ProgressBar
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            app:visibilityByResource="@{viewModel.doctorsListLiveData}"/>
+    </RelativeLayout>
+</layout>

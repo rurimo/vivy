@@ -8,5 +8,5 @@ import retrofit2.http.Query
 interface DoctorsService {
     //https://vivy.com/interviews/challenges/android/doctors-lastkey.json
     @GET("interviews/challenges/android/doctors.json")
-    fun fetchDoctors(@Query("lastKey") lastKey: String): Call<DoctorsResponse>
+    fun fetchDoctors(@Query("lastKey") lastKey: String?): Call<DoctorsResponse>
 }
