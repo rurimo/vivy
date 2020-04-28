@@ -3,8 +3,11 @@ package com.benallouch.vivy.extensions
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
-import com.benallouch.vivy.R
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import com.amulyakhare.textdrawable.TextDrawable
+import com.benallouch.vivy.R
+
 
 fun String.toTextDrawable(
     fontSize: Int, context: Context
@@ -29,4 +32,8 @@ private fun resolveTextColor(color: Int, context: Context) =
         context.resources.getColor(color)
     }
 
-fun String.appendPrefix(prefix: String) = prefix + this
+fun String.underLineText(): SpannableString {
+    val content = SpannableString(this)
+    content.setSpan(UnderlineSpan(), 0, this.length, 0)
+    return content
+}

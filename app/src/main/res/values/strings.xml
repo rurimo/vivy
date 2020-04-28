@@ -2,4 +2,6 @@
     <string name="app_name">Vivy</string>
     <string name="call">Call</string>
     <string name="address">Address</string>
+    <string name="mailTo">Mail to ...</string>
+    <string name="error_no_mail">There are no email clients installed.</string>
 </resources>

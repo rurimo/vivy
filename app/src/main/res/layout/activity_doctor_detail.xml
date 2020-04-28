@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_cream">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:background="@color/white_cream">
+
+        <ImageView
+            android:id="@+id/doctor_iv_photo"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/doctor_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/doctor_iv_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="author " />
+
+        <RatingBar
+            android:id="@+id/doctor_rating_iv"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:max="5"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/doctor_iv_photo"
+            app:layout_constraintStart_toStartOf="@+id/doctor_iv_photo"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_iv_photo" />
+
+        <TextView
+            android:id="@+id/doctor_rating_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/doctor_rating_iv"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/doctor_rating_iv"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_iv_photo"
+            tools:text="(5)" />
+
+        <TextView
+            android:id="@+id/doctor_website_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/doctor_rating_iv"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_rating_number"
+            tools:text="Website" />
+
+        <TextView
+            android:id="@+id/doctor_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:autoLink="phone"
+            android:linksClickable="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/doctor_rating_iv"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_website_tv"
+            tools:text="+49 67 58798765" />
+
+        <TextView
+            android:id="@+id/doctor_address_tv"
+            android:layout_width="match_parent"
+            android:layout_marginStart="18dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:maxLines="3"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/doctor_rating_iv"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_phone_tv"
+            tools:text=" FriedrichStrasse, sddsdfd sfddfdfsdfddsf fdsfdfdd  fdsdf dfsf dsffdds fdfds fdf dsf 102, 1111" />
+
+        <TextView
+            android:id="@+id/doctor_email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:autoLink="email"
+            android:linksClickable="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/doctor_rating_iv"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_address_tv"
+            tools:text="doctor@gmail.com" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

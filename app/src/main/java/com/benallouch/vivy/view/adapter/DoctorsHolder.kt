@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.benallouch.vivy.R
 import com.benallouch.vivy.extensions.notifyNewData
+import com.benallouch.vivy.extensions.openAddress
+import com.benallouch.vivy.extensions.startPhoneCall
 import com.benallouch.vivy.extensions.toTextDrawable
 import com.benallouch.vivy.model.Doctor
 import com.bumptech.glide.Glide
@@ -55,9 +57,7 @@ class DoctorsHolder(val callbacks: Callbacks) : RecyclerView.Adapter<DoctorsHold
         fun bindView(doctor: Doctor) {
             itemView.run {
                 doctor_tv_name.text = doctor.name
-                doctor_website_tv.text = doctor.website
                 doctor_rating_iv.rating = doctor.rating.toFloat()
-                doctor_rating_count_tv.text = doctor.reviewCount.toString()
 
                 if (doctor.phoneNumber != null) {
                     doctor_phone_btn.visibility = View.VISIBLE
@@ -105,17 +105,4 @@ class DoctorsHolder(val callbacks: Callbacks) : RecyclerView.Adapter<DoctorsHold
         }
     }
 
-    private fun Context.startPhoneCall(phoneNumber: String) {
-        val intent = Intent()
-        intent.action = Intent.ACTION_DIAL
-        intent.data = Uri.parse("tel: $phoneNumber")
-        ContextCompat.startActivity(this, intent, null)
-    }
-
-    private fun Context.openAddress(address: String) {
-        val uri: String =
-            java.lang.String.format(Locale.ENGLISH, "geo:0,0?q=%s", address)
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-        this.startActivity(intent)
-    }
 }
