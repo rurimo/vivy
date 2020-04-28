@@ -19,7 +19,7 @@ data class Doctor(
     val source: String,
     val phoneNumber: String?,
     val email: String?,
-    val website: String,
+    val website: String?,
     val openingHours: List<String>,
     val integration: String?,
     val translation: String?

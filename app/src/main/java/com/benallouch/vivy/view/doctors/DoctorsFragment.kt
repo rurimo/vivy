@@ -10,6 +10,7 @@ import com.benallouch.vivy.databinding.FragmentDoctorsBinding
 import com.benallouch.vivy.model.Doctor
 import com.benallouch.vivy.view.adapter.DoctorsHolder
 import com.benallouch.vivy.view.adapter.RecyclerViewPager
+import com.benallouch.vivy.view.detail.DoctorDetailActivity
 import kotlinx.android.synthetic.main.fragment_doctors.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
@@ -54,7 +55,7 @@ class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
     }
 
     override fun onDoctorItemSelected(doctor: Doctor) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        DoctorDetailActivity.startDoctorDetailActivity(requireContext(), doctor)
     }
 
     override fun onDataAvailable(key: String?) {
