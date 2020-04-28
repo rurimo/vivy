@@ -10,7 +10,7 @@ data class Doctor(
     val name: String,
     val photoId: String?,
     val rating: Double,
-    val address: String,
+    val address: String?,
     val lat: Double,
     val lng: Double,
     val highlighted: Boolean,

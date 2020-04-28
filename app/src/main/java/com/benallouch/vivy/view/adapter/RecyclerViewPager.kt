@@ -2,7 +2,6 @@ package com.benallouch.vivy.view.adapter
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
 
 class RecyclerViewPager(
     private val recyclerView: RecyclerView,
@@ -10,7 +9,7 @@ class RecyclerViewPager(
 ) : RecyclerView.OnScrollListener() {
 
     var isLoading = false
-    var lastKey = ""
+    var lastKey: String? = null
 
     init {
         recyclerView.addOnScrollListener(this)
@@ -33,7 +32,7 @@ class RecyclerViewPager(
 
             if (!isLoading && ((lastVisibleItemPosition + 4) >= totalItemCount)) {
                 isLoading = true
-                loadMore(lastKey)
+                lastKey?.let { key -> loadMore(key) }
             }
         }
     }

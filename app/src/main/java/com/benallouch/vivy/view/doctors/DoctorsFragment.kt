@@ -17,7 +17,6 @@ class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
 
     private lateinit var rv: RecyclerViewPager
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,7 +57,10 @@ class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onDataAvailable() {
+    override fun onDataAvailable(key: String?) {
+        rv.setDataLoaded()
+        rv.lastKey = key
+        progress_doctors.visibility = View.GONE
     }
 
     companion object {

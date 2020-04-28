@@ -12,16 +12,16 @@ class DoctorsFragmentViewModel constructor(private val doctorsRepository: Doctor
     DispatchViewModel() {
 
     private var doctorsPageLiveData: MutableLiveData<String?> = MutableLiveData()
-    val doctorsListLiveData: LiveData<List<Doctor>>
+    val doctorsListLiveData: LiveData<Pair<String?,List<Doctor>>>
 
     val toastLiveData: MutableLiveData<String> = MutableLiveData()
 
     init {
         Timber.d("injection DoctorsFragmentViewModel")
 
-        this.doctorsListLiveData = doctorsPageLiveData.switchMap {
+        this.doctorsListLiveData = doctorsPageLiveData.switchMap {lastkey->
             launchOnViewModelScope {
-                doctorsRepository.getDoctors(lastKey = it) {
+                doctorsRepository.getDoctors(lastKey = lastkey) {
                     toastLiveData.postValue(it)
 
                 }

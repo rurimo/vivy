@@ -1,5 +1,4 @@
-package com.android.gygreviews.extension
-
+package com.benallouch.vivy.extensions
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 

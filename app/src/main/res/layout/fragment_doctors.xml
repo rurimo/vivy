@@ -31,9 +31,10 @@
             tools:listitem="@layout/item_doctor" />
 
         <ProgressBar
+            android:id="@+id/progress_doctors"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
-            app:visibilityByResource="@{viewModel.doctorsListLiveData}"/>
+            app:visibilityByResource="@{viewModel.doctorsListLiveData.second}"/>
     </RelativeLayout>
 </layout>
