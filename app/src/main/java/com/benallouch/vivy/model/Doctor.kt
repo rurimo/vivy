@@ -1,6 +1,7 @@
 package com.benallouch.vivy.model
 
 import android.os.Parcelable
+import com.benallouch.vivy.view.adapter.ListItem
 import kotlinx.android.parcel.Parcelize
 
 
@@ -23,4 +24,7 @@ data class Doctor(
     val openingHours: List<String>,
     val integration: String?,
     val translation: String?
-) : Parcelable
+) : Parcelable, ListItem {
+    override val itemType: String
+        get() = this.id
+}
