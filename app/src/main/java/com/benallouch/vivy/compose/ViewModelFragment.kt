@@ -6,6 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
+/**
+ * inflate fragment views using [DataBindingUtil]
+ */
 abstract class ViewModelFragment : Fragment() {
 
     protected inline fun <reified T : ViewDataBinding> binding(

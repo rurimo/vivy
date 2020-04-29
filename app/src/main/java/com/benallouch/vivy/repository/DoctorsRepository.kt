@@ -23,11 +23,8 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
         withContext(Dispatchers.IO) {
             val liveData = MutableLiveData<DoctorsResponse>()
             var doctors = arrayListOf<Doctor>()
-            var url = if (lastKey != null) {
-                "$DOCTORS_URL-$lastKey.json"
-            } else {
-                "$DOCTORS_URL.json"
-            }
+
+            var url = getUrl(lastKey)
 
             doctorsClient.getDoctors(url) { response ->
                 when (response) {
@@ -44,5 +41,14 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
             liveData.apply { postValue(DoctorsResponse(doctors, lastKey)) }
 
         }
+
+    private fun getUrl(lastKey: String?): String {
+        var url = if (lastKey != null) {
+            "$DOCTORS_URL-$lastKey.json"
+        } else {
+            "$DOCTORS_URL.json"
+        }
+        return url
+    }
 
 }

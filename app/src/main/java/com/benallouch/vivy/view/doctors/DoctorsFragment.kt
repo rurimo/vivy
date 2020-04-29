@@ -3,9 +3,9 @@ package com.benallouch.vivy.view.doctors
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import android.widget.SearchView
-import androidx.core.view.MenuItemCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.benallouch.vivy.R
 import com.benallouch.vivy.compose.ViewModelFragment
 import com.benallouch.vivy.databinding.FragmentDoctorsBinding
