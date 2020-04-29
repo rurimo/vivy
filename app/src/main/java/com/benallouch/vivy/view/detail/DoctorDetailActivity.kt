@@ -1,8 +1,5 @@
 package com.benallouch.vivy.view.detail
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +11,10 @@ import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 import kotlinx.android.synthetic.main.activity_doctor_detail.*
 
+const val DOCTOR = "Doctor"
+const val REQUEST_CODE=999
 
-class DoctorDetailActivity : AppCompatActivity() {
+class DoctorDetailActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +24,8 @@ class DoctorDetailActivity : AppCompatActivity() {
         actionbar!!.title = "Doctor Details"
         actionbar.setDisplayHomeAsUpEnabled(true)
 
-        val intentReview = intent.getParcelableExtra<Doctor>(DOCTOR)
-        intentReview?.let { renderReview(it) }
+        val intentDoctor = intent.getParcelableExtra<Doctor>(DOCTOR)
+        intentDoctor?.let { renderReview(it) }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -36,7 +35,6 @@ class DoctorDetailActivity : AppCompatActivity() {
 
     private fun renderReview(doctor: Doctor) {
         doctor.run {
-
             doctor_tv_name.text = name
             doctor_rating_iv.rating = rating.toFloat()
             doctor_rating_number.text = "($reviewCount)"
@@ -106,16 +104,6 @@ class DoctorDetailActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        private const val DOCTOR = "Doctor"
-        fun startDoctorDetailActivity(context: Context, doctor: Doctor) {
-            if (context is Activity) {
-                context.startActivity(
-                    Intent(context, DoctorDetailActivity::class.java).putExtra(DOCTOR, doctor)
-                )
-            }
-        }
-    }
 }
 
 

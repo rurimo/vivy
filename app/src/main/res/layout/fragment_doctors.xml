@@ -11,7 +11,7 @@
 
         <variable
             name="adapter"
-            type="com.benallouch.vivy.view.adapter.DoctorsHolder" />
+            type="com.benallouch.vivy.view.adapter.DoctorsAdapter" />
     </data>
 
     <RelativeLayout

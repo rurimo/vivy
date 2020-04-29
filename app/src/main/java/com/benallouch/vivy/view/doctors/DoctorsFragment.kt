@@ -1,5 +1,7 @@
 package com.benallouch.vivy.view.doctors
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +10,19 @@ import com.benallouch.vivy.R
 import com.benallouch.vivy.compose.ViewModelFragment
 import com.benallouch.vivy.databinding.FragmentDoctorsBinding
 import com.benallouch.vivy.model.Doctor
-import com.benallouch.vivy.view.adapter.DoctorsHolder
+import com.benallouch.vivy.view.adapter.AdapterCallbacks
+import com.benallouch.vivy.view.adapter.DoctorsAdapter
 import com.benallouch.vivy.view.adapter.RecyclerViewPager
+import com.benallouch.vivy.view.detail.DOCTOR
 import com.benallouch.vivy.view.detail.DoctorDetailActivity
+import com.benallouch.vivy.view.detail.REQUEST_CODE
 import kotlinx.android.synthetic.main.fragment_doctors.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
+class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
     private lateinit var rv: RecyclerViewPager
+    private lateinit var doctorListAdapter: DoctorsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,12 +32,11 @@ class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
         return binding<FragmentDoctorsBinding>(inflater, R.layout.fragment_doctors, container)
             .apply {
                 viewModel = getViewModel<DoctorsFragmentViewModel>().apply {
-                    postDoctorsWithPagination(
-                        lastKey = null
-                    )
+                    postDoctorsWithPagination(lastKey = null)
                 }
                 lifecycleOwner = this@DoctorsFragment
-                adapter = DoctorsHolder(this@DoctorsFragment)
+                adapter = DoctorsAdapter(this@DoctorsFragment)
+                doctorListAdapter = adapter!!
             }.root
     }
 
@@ -55,7 +60,18 @@ class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
     }
 
     override fun onDoctorItemSelected(doctor: Doctor) {
-        DoctorDetailActivity.startDoctorDetailActivity(requireContext(), doctor)
+        val intent = Intent(context, DoctorDetailActivity::class.java).putExtra(DOCTOR, doctor)
+        startActivityForResult(intent, REQUEST_CODE )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            //Back press should trigger putting the items in different types (recent or all)
+            if (resultCode == Activity.RESULT_CANCELED) {
+                doctorListAdapter.dispatchChanges()
+            }
+        }
     }
 
     override fun onDataAvailable(key: String?) {
@@ -67,5 +83,6 @@ class DoctorsFragment : ViewModelFragment(), DoctorsHolder.Callbacks {
     companion object {
         const val FRAGMENT_TAG = "DOCTORS_FRAGMENT"
     }
+
 
 }
