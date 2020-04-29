@@ -11,7 +11,7 @@ import com.benallouch.vivy.compose.ViewModelFragment
 import com.benallouch.vivy.databinding.FragmentDoctorsBinding
 import com.benallouch.vivy.model.Doctor
 import com.benallouch.vivy.view.adapter.AdapterCallbacks
-import com.benallouch.vivy.view.adapter.DoctorsHolder
+import com.benallouch.vivy.view.adapter.DoctorsAdapter
 import com.benallouch.vivy.view.adapter.RecyclerViewPager
 import com.benallouch.vivy.view.detail.DOCTOR
 import com.benallouch.vivy.view.detail.DoctorDetailActivity
@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.getViewModel
 class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
     private lateinit var rv: RecyclerViewPager
-    private lateinit var doctorListAdapter: DoctorsHolder
+    private lateinit var doctorListAdapter: DoctorsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +35,7 @@ class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
                     postDoctorsWithPagination(lastKey = null)
                 }
                 lifecycleOwner = this@DoctorsFragment
-                adapter = DoctorsHolder(this@DoctorsFragment)
+                adapter = DoctorsAdapter(this@DoctorsFragment)
                 doctorListAdapter = adapter!!
             }.root
     }

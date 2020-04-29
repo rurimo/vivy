@@ -20,9 +20,10 @@ import kotlin.properties.Delegates
 
 private const val TYPE_HEADER = 1
 private const val TYPE_DATA = 2
+private const val RECENT_NUMBER= 3
 
-class DoctorsHolder(val callbacks: AdapterCallbacks) :
-    RecyclerView.Adapter<DoctorsHolder.BaseViewHolder<*>>() {
+class DoctorsAdapter(val callbacks: AdapterCallbacks) :
+    RecyclerView.Adapter<DoctorsAdapter.BaseViewHolder<*>>() {
 
     private var items: List<ListItem> by Delegates.observable(emptyList()) { _, old, new ->
         notifyNewData(old, new) { o, n -> o.itemType == n.itemType }
@@ -31,7 +32,7 @@ class DoctorsHolder(val callbacks: AdapterCallbacks) :
     private var headerItemRecent = arrayListOf<ListItem>()
     private var headerItemAll = arrayListOf<ListItem>()
     private var sortedDoctors = arrayListOf<Doctor>()
-    private var fetchedItemsRecent = arrayListOf<ListItem>()
+    private var itemsRecent = arrayListOf<ListItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -81,10 +82,10 @@ class DoctorsHolder(val callbacks: AdapterCallbacks) :
     }
 
     fun showDoctorsByType() {
-        sortedDoctors.removeAll(fetchedItemsRecent)
+        sortedDoctors.removeAll(itemsRecent)
 
-        items = if (fetchedItemsRecent.isNotEmpty())
-            headerItemRecent + fetchedItemsRecent.reversed() + headerItemAll + sortedDoctors
+        items = if (itemsRecent.isNotEmpty())
+            headerItemRecent + itemsRecent.reversed() + headerItemAll + sortedDoctors
         else
             sortedDoctors
     }
@@ -138,7 +139,13 @@ class DoctorsHolder(val callbacks: AdapterCallbacks) :
                 }
                 row_doctor_cv.setOnClickListener {
                     callbacks.onDoctorItemSelected(doctor)
-                    fetchedItemsRecent.add(doctor)
+
+                    if (itemsRecent.size < RECENT_NUMBER) {
+                        itemsRecent.add(doctor)
+                    } else {
+                        itemsRecent.remove(itemsRecent[0])
+                        itemsRecent.add(doctor)
+                    }
                     showDoctorsByType()
                 }
             }
