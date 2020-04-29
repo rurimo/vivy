@@ -12,6 +12,9 @@ fun bindToast(view: View, text: LiveData<String>) {
     }
 }
 
+/**
+ * Used for the progress bar
+ */
 @BindingAdapter("visibilityByResource")
 fun bindVisibilityByResource(view: View, list: List<Any>?) {
     when (list.isNullOrEmpty()) {

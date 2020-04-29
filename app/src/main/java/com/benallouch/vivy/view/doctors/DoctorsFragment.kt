@@ -19,6 +19,7 @@ import com.benallouch.vivy.view.detail.REQUEST_CODE
 import kotlinx.android.synthetic.main.fragment_doctors.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
+
 class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
     private lateinit var rv: RecyclerViewPager
@@ -61,7 +62,7 @@ class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
     override fun onDoctorItemSelected(doctor: Doctor) {
         val intent = Intent(context, DoctorDetailActivity::class.java).putExtra(DOCTOR, doctor)
-        startActivityForResult(intent, REQUEST_CODE )
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

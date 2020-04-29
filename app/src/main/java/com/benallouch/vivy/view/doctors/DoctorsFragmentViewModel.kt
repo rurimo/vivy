@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import com.benallouch.vivy.compose.DispatchViewModel
 import com.benallouch.vivy.model.Doctor
+import com.benallouch.vivy.model.DoctorsResponse
 import com.benallouch.vivy.repository.DoctorsRepository
 import timber.log.Timber
 
@@ -12,16 +13,16 @@ class DoctorsFragmentViewModel constructor(private val doctorsRepository: Doctor
     DispatchViewModel() {
 
     private var doctorsPageLiveData: MutableLiveData<String?> = MutableLiveData()
-    val doctorsListLiveData: LiveData<Pair<String?,List<Doctor>>>
+    val doctorsListLiveData: LiveData<DoctorsResponse>
 
     val toastLiveData: MutableLiveData<String> = MutableLiveData()
 
     init {
         Timber.d("injection DoctorsFragmentViewModel")
 
-        this.doctorsListLiveData = doctorsPageLiveData.switchMap {lastkey->
+        this.doctorsListLiveData = doctorsPageLiveData.switchMap {lastKey->
             launchOnViewModelScope {
-                doctorsRepository.getDoctors(lastKey = lastkey) {
+                doctorsRepository.getDoctors(lastKey = lastKey) {
                     toastLiveData.postValue(it)
 
                 }

@@ -3,6 +3,12 @@ package com.benallouch.vivy.api
 import retrofit2.Call
 import retrofit2.Callback
 
+/**
+ * serves as an extension that returns
+ * - success + data
+ * - failure: code+ message
+ * - exception: message
+ */
 fun <T> Call<T>.async(onResult: (response: ApiResponse<T>) -> Unit) {
     enqueue(object : Callback<T> {
         override fun onResponse(call: Call<T>, response: retrofit2.Response<T>) {
