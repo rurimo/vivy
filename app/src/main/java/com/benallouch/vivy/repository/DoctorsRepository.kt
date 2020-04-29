@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-private const val URL = "https://vivy.com/interviews/challenges/android/doctors"
+private const val DOCTORS_URL = "https://vivy.com/interviews/challenges/android/doctors"
 
 class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
 
@@ -23,9 +23,9 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
             val liveData = MutableLiveData<Pair<String?, List<Doctor>>>()
             var doctors = arrayListOf<Doctor>()
             var url = if (lastKey != null) {
-                "$URL-$lastKey.json"
+                "$DOCTORS_URL-$lastKey.json"
             } else {
-                "$URL.json"
+                "$DOCTORS_URL.json"
             }
 
             doctorsClient.getDoctors(url) { response ->
