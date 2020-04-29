@@ -31,14 +31,14 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
                     is ApiResponse.Success -> {
                         response.data?.let {
                             doctors.addAll(it.doctors)
-                            liveData.postValue(DoctorsResponse(doctors, lastKey))
+                            liveData.postValue(DoctorsResponse(doctors, it.lastKey))
                         }
                     }
                     is ApiResponse.Failure.Error -> error(response.message())
                     is ApiResponse.Failure.Exception -> error(response.message())
                 }
             }
-            liveData.apply { postValue(DoctorsResponse(doctors, lastKey)) }
+            liveData.apply { postValue(DoctorsResponse(doctors,lastKey )) }
 
         }
 
