@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.getViewModel
 
 class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
-    private lateinit var rv: RecyclerViewPager
+    private lateinit var recyclerViewPager: RecyclerViewPager
     private lateinit var doctorListAdapter: DoctorsAdapter
 
     override fun onCreateView(
@@ -48,12 +48,12 @@ class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
     }
 
     private fun setupScrollListener() {
-        rv = RecyclerViewPager(
+        recyclerViewPager = RecyclerViewPager(
             recyclerView = recyclerView_doctors,
             loadMore = { lastKey ->
                 fetchDoctors(lastKey = lastKey)
             })
-        rv.isLoading = false
+        recyclerViewPager.isLoading = false
     }
 
     private fun fetchDoctors(lastKey: String) {
@@ -71,13 +71,22 @@ class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
             //Back press should trigger putting the items in different types (recent or all)
             if (resultCode == Activity.RESULT_CANCELED) {
                 doctorListAdapter.dispatchChanges()
+
+                //We can activate this if we want to scroll to the first position
+                /*   Timer().schedule(300) {
+                       requireActivity().runOnUiThread {
+                           recyclerView_doctors.smoothScrollToPosition(
+                               0
+                           )
+                       }
+                   }*/
             }
         }
     }
 
     override fun onDataAvailable(key: String?) {
-        rv.setDataLoaded()
-        rv.lastKey = key
+        recyclerViewPager.setDataLoaded()
+        recyclerViewPager.lastKey = key
         progress_doctors.visibility = View.GONE
     }
 

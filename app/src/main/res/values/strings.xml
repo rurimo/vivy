@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vivy</string>
+    <string name="app_name">Vivy Test</string>
     <string name="call">Call</string>
     <string name="address">Address</string>
     <string name="mailTo">Mail to ...</string>
