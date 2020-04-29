@@ -10,6 +10,7 @@ import com.benallouch.vivy.extensions.openAddress
 import com.benallouch.vivy.extensions.startPhoneCall
 import com.benallouch.vivy.extensions.toTextDrawable
 import com.benallouch.vivy.model.Doctor
+import com.benallouch.vivy.model.DoctorsResponse
 import com.benallouch.vivy.model.HeaderItem
 import com.bumptech.glide.Glide
 import com.github.florent37.glidepalette.BitmapPalette
@@ -65,20 +66,20 @@ class DoctorsAdapter(val callbacks: AdapterCallbacks) :
         }
     }
 
-    fun updateData(newData: Pair<String, List<Doctor>>) {
+    fun updateData(newData: DoctorsResponse) {
         headerItemRecent.clear()
         headerItemAll.clear()
         headerItemRecent.add(HeaderItem("Recent Doctors"))
         headerItemAll.add(HeaderItem("Vivy Doctors"))
 
         val fetchedItemsAll = arrayListOf<Doctor>()
-        fetchedItemsAll.addAll(newData.second as ArrayList<Doctor>)
+        fetchedItemsAll.addAll(newData.doctors as ArrayList<Doctor>)
 
         sortedDoctors.addAll((fetchedItemsAll.sortedWith(compareByDescending<Doctor> { it.rating }
             .thenByDescending { it.name })))
 
         showDoctorsByType()
-        callbacks.onDataAvailable(newData.first)
+        callbacks.onDataAvailable(newData.lastKey)
     }
 
     fun showDoctorsByType() {

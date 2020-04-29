@@ -10,10 +10,7 @@ import java.io.IOException
 
 class DoctorsRepositoryTest : ApiAbstract<DoctorsService>() {
     private lateinit var service: DoctorsService
-    private val lastKey = "CvQD7gEAAKjcb"
-    private val firstPageUrl = "https://vivy.com/interviews/challenges/android/doctors.json"
-    private val secondPageUrl =
-        "https://vivy.com/interviews/challenges/android/doctors-$lastKey.json"
+
 
     @Before
     fun initService() {
@@ -24,7 +21,7 @@ class DoctorsRepositoryTest : ApiAbstract<DoctorsService>() {
     @Test
     fun getDoctorsFirstPage() {
         enqueueResponse("doctors_response_1.json")
-        val response = this.service.fetchDoctors(firstPageUrl).execute()
+        val response = this.service.fetchDoctors(MockTestUtil.firstPageUrl).execute()
         assert(response.isSuccessful)
         MatcherAssert.assertThat(
             response.body()!!.doctors.first().id,
@@ -32,7 +29,7 @@ class DoctorsRepositoryTest : ApiAbstract<DoctorsService>() {
         )
         MatcherAssert.assertThat(
             response.body()!!.lastKey,
-            CoreMatchers.`is`(lastKey)
+            CoreMatchers.`is`(MockTestUtil.lastKey)
         )
     }
 
@@ -40,7 +37,7 @@ class DoctorsRepositoryTest : ApiAbstract<DoctorsService>() {
     @Test
     fun getDoctorsSecondPage() {
         enqueueResponse("doctors_response_2.json")
-        val response = this.service.fetchDoctors(secondPageUrl).execute()
+        val response = this.service.fetchDoctors(MockTestUtil.secondPageUrl).execute()
         assert(response.isSuccessful)
 
         MatcherAssert.assertThat(

@@ -5,6 +5,7 @@ import com.benallouch.vivy.api.ApiResponse
 import com.benallouch.vivy.api.doctors.DoctorsClient
 import com.benallouch.vivy.api.message
 import com.benallouch.vivy.model.Doctor
+import com.benallouch.vivy.model.DoctorsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -20,7 +21,7 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
 
     suspend fun getDoctors(lastKey: String?, error: (String) -> Unit) =
         withContext(Dispatchers.IO) {
-            val liveData = MutableLiveData<Pair<String?, List<Doctor>>>()
+            val liveData = MutableLiveData<DoctorsResponse>()
             var doctors = arrayListOf<Doctor>()
             var url = if (lastKey != null) {
                 "$DOCTORS_URL-$lastKey.json"
@@ -33,14 +34,14 @@ class DoctorsRepository constructor(private val doctorsClient: DoctorsClient) {
                     is ApiResponse.Success -> {
                         response.data?.let {
                             doctors.addAll(it.doctors)
-                            liveData.postValue(Pair(it.lastKey, doctors))
+                            liveData.postValue(DoctorsResponse(doctors, lastKey))
                         }
                     }
                     is ApiResponse.Failure.Error -> error(response.message())
                     is ApiResponse.Failure.Exception -> error(response.message())
                 }
             }
-            liveData.apply { postValue(Pair(lastKey, doctors)) }
+            liveData.apply { postValue(DoctorsResponse(doctors, lastKey)) }
 
         }
 

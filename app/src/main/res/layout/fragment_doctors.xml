@@ -35,6 +35,6 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
-            app:visibilityByResource="@{viewModel.doctorsListLiveData.second}"/>
+            app:visibilityByResource="@{viewModel.doctorsListLiveData.doctors}"/>
     </RelativeLayout>
 </layout>

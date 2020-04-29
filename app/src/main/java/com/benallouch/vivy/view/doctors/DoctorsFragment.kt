@@ -3,9 +3,9 @@ package com.benallouch.vivy.view.doctors
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import com.benallouch.vivy.R
 import com.benallouch.vivy.compose.ViewModelFragment
 import com.benallouch.vivy.databinding.FragmentDoctorsBinding
@@ -18,6 +18,7 @@ import com.benallouch.vivy.view.detail.DoctorDetailActivity
 import com.benallouch.vivy.view.detail.REQUEST_CODE
 import kotlinx.android.synthetic.main.fragment_doctors.*
 import org.koin.android.viewmodel.ext.android.getViewModel
+
 
 class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
@@ -61,7 +62,7 @@ class DoctorsFragment : ViewModelFragment(), AdapterCallbacks {
 
     override fun onDoctorItemSelected(doctor: Doctor) {
         val intent = Intent(context, DoctorDetailActivity::class.java).putExtra(DOCTOR, doctor)
-        startActivityForResult(intent, REQUEST_CODE )
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
